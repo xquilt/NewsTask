@@ -7,7 +7,7 @@ interface HomeScreenViewModel {
     suspend fun getNewsFeed(): List<Publication>
 }
 
-class NewsScreenViewModelMock: HomeScreenViewModel {
+class HomeScreenViewModelMock: HomeScreenViewModel {
     override suspend fun getNewsFeed(): List<Publication> = listOf(
         Publication(
             author = "Zac Johnson",

@@ -11,7 +11,7 @@ data class Publication(
     val source: Source
 ) {
     data class Source(
-        val id: Int?,
+        val id: String?,
         val name: String?
     )
 }
