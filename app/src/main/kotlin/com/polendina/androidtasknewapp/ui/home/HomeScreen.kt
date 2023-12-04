@@ -78,7 +78,7 @@ fun HomeScreen(
             LazyRow (
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                items(runBlocking { homeScreenViewModel.getNewsFeed() }) {
+                items(homeScreenViewModel.newsFeed) {
                     PublicationCard(
                         publication = it,
                         modifier = Modifier
@@ -102,7 +102,7 @@ fun HomeScreen(
                     )
             )
             LazyColumn {
-                items(runBlocking { homeScreenViewModel.getNewsFeed().reversed() }) {
+                items(homeScreenViewModel.newsFeed.reversed()) {
                     HorizontalPublication(
                         publication = it,
                         modifier = Modifier
@@ -113,7 +113,6 @@ fun HomeScreen(
             }
         }
     }
-    
 }
 
 @Preview(name = "Home screen (Light mode)", showBackground = true)

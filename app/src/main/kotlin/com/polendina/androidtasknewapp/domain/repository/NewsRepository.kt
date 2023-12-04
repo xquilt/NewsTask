@@ -40,7 +40,6 @@ interface NewsRepository {
         @Query("country") country: String = Constants.countries.first(),
         @Query("language") language: String = Constants.Languages.ENGLISH.code
     ): Response<NewsSources>
-
     /**
      * This endpoint provides live top and breaking headlines for a country, specific category in a country, single source, or multiple sources.
      *
