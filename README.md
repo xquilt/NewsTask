@@ -12,13 +12,15 @@ A sample news reading app, built with Jetpack Compose.
 - [x] Kotlin
 - [x] Coroutines
 - [x] Jetpack compose
-- [x] Material UI
+- [x] Material Design 3
 - [x] Clean Architecture
 - [x] MVVM
 - [x] SOLID
-- [x] Coil
 - [x] Retrofit
 - [x] Gson
+- [x] Coil
+- [x] Unit Testing
+- [x] Coroutines testing
 
 ## Features
 - The sample app contains two screens: The home screen with the top headlines, a publication webview for each and every individual article.
