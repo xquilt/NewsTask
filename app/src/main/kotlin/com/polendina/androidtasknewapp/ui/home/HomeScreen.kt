@@ -15,13 +15,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.DashboardCustomize
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
@@ -41,9 +39,7 @@ import com.polendina.androidtasknewapp.ui.BottomBar
 import com.polendina.androidtasknewapp.ui.home.widgets.HorizontalPublication
 import com.polendina.androidtasknewapp.ui.home.widgets.PublicationCard
 import com.polendina.androidtasknewapp.ui.home.widgets.TopBarSection
-import com.polendina.androidtasknewapp.ui.theme.AndroidTaskNewAppTheme
 import com.polendina.androidtasknewapp.utils.Constants
-import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,7 +85,7 @@ fun HomeScreen(
                 },
                 trailingIcon = {
                     Icon(
-                        imageVector = Icons.Default.Menu,
+                        imageVector = Icons.Default.DashboardCustomize,
                         contentDescription = null
                     )
                 },
@@ -162,7 +158,7 @@ fun HomeScreen(
 @Preview(name = "Home screen (Light mode)", showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    AndroidTaskNewAppTheme {
+//    AndroidTaskNewAppTheme {
         HomeScreen(homeScreenViewModel = HomeScreenViewModelMock())
-    }
+//    }
 }
