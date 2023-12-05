@@ -78,7 +78,7 @@ fun WebViewScreen(
                     settings.javaScriptEnabled = true
                     webViewClient = WebViewClient()
                     // TODO: Doa  conditional null check to display other screen in the absence of a URL
-                    loadUrl(publicationUrl ?: "")
+                    loadUrl(publicationUrl)
                 }
             },
             modifier = Modifier

@@ -16,7 +16,7 @@ class FakeNewsRepository: NewsRepository {
             urlToImage = R.drawable.michael_keaton_net_worth.toString(),
             publishedAt = "2023-12-03T10:40:06Z",
             content = "Michael Keaton is an American actor with a diverse and successful career in the entertainment industry. Known for his roles in films like “Batman” and “Birdman,” Keaton has managed to accumulate a ne… [+14588 chars]",
-            Publication.Source(
+            source = Publication.Source(
                 id = null,
                 name = "Zacjohnson.com"
             )

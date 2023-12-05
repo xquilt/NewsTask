@@ -86,6 +86,10 @@ dependencies {
     // Compose destinations
     implementation("io.github.raamcosta.compose-destinations:core:1.9.55")
     ksp("io.github.raamcosta.compose-destinations:ksp:1.9.55")
+    // Room database
+    val roomVersion = "2.5.2"
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
     // Unit testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.3")

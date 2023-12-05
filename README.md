@@ -21,10 +21,12 @@ A sample news reading app, built with Jetpack Compose.
 - [x] Coil
 - [x] Unit Testing
 - [x] Coroutines testing
+- [x] ROOM database
 
 ## Features
 - The sample app contains two screens: The home screen with the top headlines, a publication webview for each and every individual article.
 - The user can share a certain publication page. 
+- Offline caching of previously loaded articles, where there's no internet connectivity.
 
 ## License
 
