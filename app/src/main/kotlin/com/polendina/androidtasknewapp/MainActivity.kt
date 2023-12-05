@@ -7,10 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.polendina.androidtasknewapp.data.repository.NewsRepositoryImpl
-import com.polendina.androidtasknewapp.ui.home.HomeScreen
-import com.polendina.androidtasknewapp.ui.home.HomeScreenViewModelImpl
+import com.polendina.androidtasknewapp.ui.NavGraphs
 import com.polendina.androidtasknewapp.ui.theme.AndroidTaskNewAppTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen(homeScreenViewModel = HomeScreenViewModelImpl(newsRepository = NewsRepositoryImpl()))
+                    DestinationsNavHost(navGraph = NavGraphs.root)
                 }
             }
         }

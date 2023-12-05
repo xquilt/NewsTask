@@ -36,16 +36,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.polendina.androidtasknewapp.R
+import com.polendina.androidtasknewapp.data.repository.NewsRepositoryImpl
 import com.polendina.androidtasknewapp.ui.BottomBar
+import com.polendina.androidtasknewapp.ui.destinations.WebViewScreenDestination
 import com.polendina.androidtasknewapp.ui.home.widgets.HorizontalPublication
 import com.polendina.androidtasknewapp.ui.home.widgets.PublicationCard
 import com.polendina.androidtasknewapp.ui.home.widgets.TopBarSection
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
+@RootNavGraph(start = true)
+@Destination
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    homeScreenViewModel: HomeScreenViewModel
+    homeScreenViewModel: HomeScreenViewModel = HomeScreenViewModelImpl(newsRepository = NewsRepositoryImpl()),
+    navigator: DestinationsNavigator
 ) {
     Scaffold (
         topBar = {
@@ -55,7 +64,9 @@ fun HomeScreen(
                         .fillMaxWidth()
                 ) {
                     // TODO: Get dimensions in a separate dimensions resource file!
-                    Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                    Spacer(
+                        modifier = Modifier.padding(vertical = 10.dp)
+                    )
                 }
                 SearchBar(
                     query = homeScreenViewModel.searchQuery.value,
@@ -129,6 +140,8 @@ fun HomeScreen(
             item {
                 LazyRow (
                     horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
                 ) {
                     items(homeScreenViewModel.newsFeed) {
                         PublicationCard(
@@ -161,6 +174,12 @@ fun HomeScreen(
                     publication = it,
                     modifier = Modifier
                         .height(100.dp)
+                        .padding(vertical = 10.dp)
+                        .clickable {
+                            navigator.navigate(
+                                WebViewScreenDestination(publicationUrl = it.url ?: "")
+                            )
+                        }
                 )
                 Divider()
             }
@@ -171,5 +190,8 @@ fun HomeScreen(
 @Preview(name = "Home screen (Light mode)", showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(homeScreenViewModel = HomeScreenViewModelMock())
+    HomeScreen(
+        homeScreenViewModel = HomeScreenViewModelMock(),
+        navigator = EmptyDestinationsNavigator
+    )
 }

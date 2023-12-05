@@ -21,19 +21,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.polendina.androidtasknewapp.domain.model.Publication
 import com.polendina.androidtasknewapp.domain.repository.FakeNewsRepository
+import com.polendina.androidtasknewapp.ui.destinations.HomeScreenDestination
 import com.polendina.androidtasknewapp.ui.theme.AndroidTaskNewAppTheme
 import com.polendina.androidtasknewapp.ui.webview.widgets.WebViewTopBar
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
+@Destination
 @Composable
 fun WebViewScreen(
     modifier: Modifier = Modifier,
-    publication: Publication
+    publicationUrl: String,
+    navigator: DestinationsNavigator
 ) {
     val context = LocalContext.current
     Scaffold (
         topBar = {
             WebViewTopBar(
-                navigationBack = { /*TODO*/ },
+                navigationBack = {
+                    navigator.navigate(HomeScreenDestination())
+                },
                 bookmarkArticle = { /*TODO*/ },
                 moreOptions = { /*TODO*/ }
             )
@@ -44,7 +52,7 @@ fun WebViewScreen(
                     context.startActivity(Intent.createChooser(
                         Intent().apply {
                             action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_INTENT, publication.url)
+                            putExtra(Intent.EXTRA_INTENT, publicationUrl)
                             type = "text/plain"
                         },
                         null
@@ -70,7 +78,7 @@ fun WebViewScreen(
                     settings.javaScriptEnabled = true
                     webViewClient = WebViewClient()
                     // TODO: Doa  conditional null check to display other screen in the absence of a URL
-                    loadUrl(publication.url ?: "")
+                    loadUrl(publicationUrl ?: "")
                 }
             },
             modifier = Modifier
@@ -85,7 +93,8 @@ fun WebViewScreen(
 fun PublicationView() {
     AndroidTaskNewAppTheme {
         WebViewScreen(
-            publication = FakeNewsRepository().publications.random()
+            publicationUrl = FakeNewsRepository().publications.random().url ?: "",
+            navigator = EmptyDestinationsNavigator
         )
     }
 }

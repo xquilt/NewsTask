@@ -1,6 +1,5 @@
 package com.polendina.androidtasknewapp.ui.home.widgets
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
