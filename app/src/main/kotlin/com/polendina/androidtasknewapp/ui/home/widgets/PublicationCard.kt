@@ -29,9 +29,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.polendina.androidtasknewapp.R
 import com.polendina.androidtasknewapp.domain.model.Publication
-import androidx.compose.ui.res.painterResource as painterResource1
 
 @Composable
 fun PublicationCard(
@@ -52,10 +52,9 @@ fun PublicationCard(
         Box(
             modifier = Modifier
                 .height(180.dp)
-//                .fillMaxHeight(0.7f)
         ) {
-            Image(
-                painter = painterResource1(id = publication.urlToImage?.toInt() ?: 0),
+            AsyncImage(
+                model = publication.urlToImage,
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds
             )
