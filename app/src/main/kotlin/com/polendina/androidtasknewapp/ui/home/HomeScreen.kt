@@ -40,7 +40,6 @@ import com.polendina.androidtasknewapp.ui.BottomBar
 import com.polendina.androidtasknewapp.ui.home.widgets.HorizontalPublication
 import com.polendina.androidtasknewapp.ui.home.widgets.PublicationCard
 import com.polendina.androidtasknewapp.ui.home.widgets.TopBarSection
-import com.polendina.androidtasknewapp.utils.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,12 +49,67 @@ fun HomeScreen(
 ) {
     Scaffold (
         topBar = {
-            TopBarSection(
-                modifier = modifier
-                    .fillMaxWidth()
-            ) {
-                // TODO: Get dimensions in a separate dimensions resource file!
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
+            Column {
+                TopBarSection(
+                    modifier = modifier
+                        .fillMaxWidth()
+                ) {
+                    // TODO: Get dimensions in a separate dimensions resource file!
+                    Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                }
+                SearchBar(
+                    query = homeScreenViewModel.searchQuery.value,
+                    onQueryChange = {
+                        homeScreenViewModel.searchQuery.value = it
+                    },
+                    onSearch = {
+                        homeScreenViewModel.searchArticles(searchQuery = it)
+                    },
+                    active = true,
+                    onActiveChange = {},
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
+                        )
+                    },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Dashboard,
+                            contentDescription = null
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(70.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                ) { }
+                LazyRow (
+                    horizontalArrangement = Arrangement.spacedBy(5.dp),
+                    modifier = Modifier
+                        .padding(vertical = 15.dp)
+                ) {
+                    items(homeScreenViewModel.categories) {
+                        Box (
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(15.dp))
+                                .background(MaterialTheme.colorScheme.primary)
+                                .padding(10.dp)
+                                .clickable {
+                                    homeScreenViewModel.searchArticles(
+                                        searchQuery = it.title
+                                    )
+                                }
+                        ) {
+                            Text(
+                                text = it.title,
+                                style = TextStyle(
+                                    color = MaterialTheme.colorScheme.onPrimary
+                                )
+                            )
+                        }
+                    }
+                }
             }
         },
         bottomBar = { BottomBar() },
@@ -66,92 +120,49 @@ fun HomeScreen(
                 end = 10.dp
             )
     ) {
-        Column (
+        LazyColumn (
             modifier = Modifier
                 .fillMaxSize()
                 .fillMaxHeight()
                 .padding(it)
         ) {
-            SearchBar(
-                query = "",
-                onQueryChange = {},
-                onSearch = {},
-                active = true,
-                onActiveChange = {},
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = null
-                    )
-                },
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Dashboard,
-                        contentDescription = null
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(70.dp)
-                    .clip(RoundedCornerShape(25.dp))
-            ) { }
-            LazyRow (
-                horizontalArrangement = Arrangement.spacedBy(5.dp),
-                modifier = Modifier
-                    .padding(vertical = 15.dp)
-            ) {
-                items(Constants.Categories.entries) {
-                    Box (
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(15.dp))
-                            .background(MaterialTheme.colorScheme.primary)
-                            .padding(10.dp)
-                            .clickable { /*TODO: Implement a data search functionality!*/ }
-                    ) {
-                        Text(
-                            text = it.title,
-                            style = TextStyle(
-                                color = MaterialTheme.colorScheme.onPrimary
-                            )
+            item {
+                LazyRow (
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    items(homeScreenViewModel.newsFeed) {
+                        PublicationCard(
+                            publication = it,
+                            modifier = Modifier
+                                .padding(horizontal = 5.dp)
                         )
                     }
                 }
             }
-            LazyRow (
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                items(homeScreenViewModel.newsFeed) {
-                    PublicationCard(
-                        publication = it,
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp)
-                    )
-                }
+            item {
+                Text(
+                    text = stringResource(id = R.string.latest_news),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = TextStyle(
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp
+                    ),
+                    modifier = Modifier
+                        .padding(
+                            top = 15.dp,
+                            bottom = 10.dp
+                        )
+                )
             }
-            Text(
-                text = stringResource(id = R.string.latest_news),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 20.sp
-                ),
-                modifier = Modifier
-                    .padding(
-                        top = 15.dp,
-                        bottom = 10.dp
-                    )
-            )
-            LazyColumn {
-                items(homeScreenViewModel.newsFeed.reversed()) {
-                    HorizontalPublication(
-                        publication = it,
-                        modifier = Modifier
-                            .height(100.dp)
-                    )
-                    Divider()
-                }
+            items(homeScreenViewModel.newsFeed.reversed()) {
+                HorizontalPublication(
+                    publication = it,
+                    modifier = Modifier
+                        .height(100.dp)
+                )
+                Divider()
             }
         }
     }
