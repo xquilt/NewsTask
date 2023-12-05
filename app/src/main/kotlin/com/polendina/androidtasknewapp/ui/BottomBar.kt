@@ -4,11 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Icon
@@ -36,13 +36,14 @@ fun BottomBar() {
             .clip(RoundedCornerShape(10.dp))
             .fillMaxWidth()
             .height(60.dp)
+            .padding(10.dp)
     ) {
         BottomBarDestinations.entries.forEach {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     imageVector = it.icon,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.outline
                 )
             }
         }

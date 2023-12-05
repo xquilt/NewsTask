@@ -5,7 +5,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,18 +51,30 @@ fun HorizontalPublication(
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Medium,
                     fontStyle = FontStyle.Normal
-                )
+                ),
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
             )
-            Text(
-                text = publication.author ?: stringResource(id = R.string.no_author),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    fontSize = 10.sp,
-                    fontStyle = FontStyle.Normal,
-                    color = MaterialTheme.colorScheme.outline
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.outline
                 )
-            )
+                Text(
+                    text = publication.author ?: stringResource(id = R.string.no_author),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    style = TextStyle(
+                        fontSize = 10.sp,
+                        fontStyle = FontStyle.Normal,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                )
+            }
         }
         Image(
             painter = painterResource(id = publication.urlToImage?.toInt() ?: 0),
