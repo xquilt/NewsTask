@@ -36,7 +36,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.polendina.androidtasknewapp.R
-import com.polendina.androidtasknewapp.data.repository.NewsRepositoryImpl
 import com.polendina.androidtasknewapp.ui.BottomBar
 import com.polendina.androidtasknewapp.ui.destinations.WebViewScreenDestination
 import com.polendina.androidtasknewapp.ui.home.widgets.HorizontalPublication
@@ -53,7 +52,7 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    homeScreenViewModel: HomeScreenViewModel = HomeScreenViewModelImpl(newsRepository = NewsRepositoryImpl()),
+    homeScreenViewModel: HomeScreenViewModel,
     navigator: DestinationsNavigator
 ) {
     Scaffold (

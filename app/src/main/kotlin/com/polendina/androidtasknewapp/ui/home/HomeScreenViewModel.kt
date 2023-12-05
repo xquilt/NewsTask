@@ -29,7 +29,7 @@ interface HomeScreenViewModel {
 
 class HomeScreenViewModelImpl(
     private val newsRepository: NewsRepository,
-    private val application: Application = Application(),
+    private val application: Application,
     val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ): HomeScreenViewModel, AndroidViewModel(application) {
     private val scope = CoroutineScope(coroutineDispatcher)
