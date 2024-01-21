@@ -4,7 +4,7 @@ import java.lang.System.*
 
 class Constants {
     companion object {
-        val API_KEY = getenv("NEWS_API")
+        val API_KEY = "ef4088e60b504ec4aa7d1a3f29857fd6"
         val countries = listOf(
             "us", "ar", "at", "au", "be", "bg", "br", "ca", "lc", "hc", "nc", "oc", "uc", "zd", "ee",
             "gf", "rg", "bg", "rh", "kh", "ui", "di", "ei", "li", "ni", "tj", "pk", "rl", "tl", "vm",
